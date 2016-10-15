@@ -24,10 +24,10 @@ function palette (){
   var pal = document.createElement("table");
   pal.id = "palette";
   var newRow = document.createElement("tr");
-    for (ww = 0; ww < 4; ww++){
+    for (ww = 0; ww < 14; ww++){
       var newCell = document.createElement("td");
-      newCell.style.height = "30px";
-      newCell.style.width = "30px";
+      newCell.style.height = "50px";
+      newCell.style.width = "50px";
       newCell.style.borderWidth = "2px"
       newCell.style.borderStyle = "solid";
       newCell.style.borderColor = "black";
@@ -43,6 +43,36 @@ function palette (){
         break;
         case (3):
         newCell.style.backgroundColor = "yellow";
+        break;
+        case (4):
+        newCell.style.backgroundColor = "orange";
+        break;
+        case (5):
+        newCell.style.backgroundColor = "green";
+        break;
+        case (6):
+        newCell.style.backgroundColor = "purple";
+        break;
+        case (7):
+        newCell.style.backgroundColor = "violet";
+        break;
+        case (8):
+        newCell.style.backgroundColor = "brown";
+        break;
+        case (9):
+        newCell.style.backgroundColor = "deeppink";
+        break;
+        case (10):
+        newCell.style.backgroundColor = "silver";
+        break;
+        case (11):
+        newCell.style.backgroundColor = "gold";
+        break;
+        case (12):
+        newCell.style.backgroundColor = "black";
+        break;
+        case (13):
+        newCell.style.backgroundColor = "";
       }
         newRow.appendChild(newCell);
         }
@@ -54,22 +84,18 @@ palette ();
 var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
 
-// function getColor (event){
-//   var currentColor = event.target.getColor("backgroundColor");
-//   console.log (currentColor);
-//   return currentColor;
-// };
-
 function paint (event){
+  // event.stopPropagation();
   if (event.target.style.backgroundColor == "white"){
     event.target.style.backgroundColor = currentColor;
+    pixelTable.style.backgroundColor = "white";
   } else {
     event.target.style.backgroundColor = "white";
   }
 };
 
 pixelTable.addEventListener("click", paint);
-var currentColor = ";"
+var currentColor = "";
 colorPalette.addEventListener ("click", function (){
   currentColor = event.target.style.backgroundColor;
 });
