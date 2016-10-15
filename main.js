@@ -18,13 +18,13 @@ function canvas (height, width){
   document.body.appendChild(tbl);
 };
 
-canvas (30, 75);
+canvas (35, 76);
 
 function palette (){
   var pal = document.createElement("table");
   pal.id = "palette";
   var newRow = document.createElement("tr");
-    for (ww = 0; ww < 14; ww++){
+    for (ww = 0; ww < 21; ww++){
       var newCell = document.createElement("td");
       newCell.style.height = "50px";
       newCell.style.width = "50px";
@@ -85,17 +85,31 @@ var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
 
 function paint (event){
-  // event.stopPropagation();
+  if (event.target.tagName == "TD"){
   if (event.target.style.backgroundColor == "white"){
     event.target.style.backgroundColor = currentColor;
-    pixelTable.style.backgroundColor = "white";
+    // pixelTable.style.backgroundColor = "white";
   } else {
     event.target.style.backgroundColor = "white";
   }
+}
+  console.log (event.target.tagName);
 };
 
-pixelTable.addEventListener("click", paint);
+pixelTable.addEventListener ("click", paint);
 var currentColor = "";
 colorPalette.addEventListener ("click", function (){
   currentColor = event.target.style.backgroundColor;
 });
+
+pixelTable.addEventListener ("mousedown", multiPaint);
+
+function multiPaint (event){
+  pixelTable.addEventListener ("mouseup", function(){
+    pixelTable.removeEventListener ("mouseenter", function(){});
+  });
+  pixelTable.addEventListener ("mouseenter", function(){
+    event.target.style.backgroundColor = currentColor;
+    console.log ("multiPainting!");
+  });
+};
