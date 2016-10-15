@@ -11,6 +11,7 @@ function canvas (height, width){
       col.style.borderColor = "black";
       col.style.borderStyle = "solid";
       col.style.backgroundColor = "white";
+      col.class = "color-cell";
       row.appendChild(col);
     }
     tbl.appendChild(row);
@@ -24,10 +25,10 @@ function palette (){
   var pal = document.createElement("table");
   pal.id = "palette";
   var newRow = document.createElement("tr");
-    for (ww = 0; ww < 21; ww++){
+    for (ww = 0; ww < 25; ww++){
       var newCell = document.createElement("td");
-      newCell.style.height = "50px";
-      newCell.style.width = "50px";
+      newCell.style.height = "40px";
+      newCell.style.width = "40px";
       newCell.style.borderWidth = "2px"
       newCell.style.borderStyle = "solid";
       newCell.style.borderColor = "black";
@@ -83,17 +84,12 @@ palette ();
 
 var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
+// var colorCells = document.getElementsByClass("color-cell");
 
 function paint (event){
   if (event.target.tagName == "TD"){
-  if (event.target.style.backgroundColor == "white"){
     event.target.style.backgroundColor = currentColor;
-    // pixelTable.style.backgroundColor = "white";
-  } else {
-    event.target.style.backgroundColor = "white";
-  }
 }
-  console.log (event.target.tagName);
 };
 
 pixelTable.addEventListener ("click", paint);
@@ -102,14 +98,17 @@ colorPalette.addEventListener ("click", function (){
   currentColor = event.target.style.backgroundColor;
 });
 
-pixelTable.addEventListener ("mousedown", multiPaint);
-
-function multiPaint (event){
-  pixelTable.addEventListener ("mouseup", function(){
-    pixelTable.removeEventListener ("mouseenter", function(){});
-  });
-  pixelTable.addEventListener ("mouseenter", function(){
+pixelTable.addEventListener("mousedown", function(){
+  pixelTable.addEventListener("mouseover", function(){
+    if (event.target.tagName == "TD"){
     event.target.style.backgroundColor = currentColor;
-    console.log ("multiPainting!");
+    console.log("testing");
+  }
   });
-};
+});
+
+pixelTable.addEventListener("mouseup", function(){
+  pixelTable.removeEventListener("mouseover", function(){
+    console.log("testing");
+  });
+});
