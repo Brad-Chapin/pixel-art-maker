@@ -51,12 +51,25 @@ function palette (){
     }
 palette ();
 
+var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
 
-pixelTable.addEventListener("click", function(){
+// function getColor (event){
+//   var currentColor = event.target.getColor("backgroundColor");
+//   console.log (currentColor);
+//   return currentColor;
+// };
+
+function paint (event){
   if (event.target.style.backgroundColor == "white"){
-    event.target.style.backgroundColor = "red";
+    event.target.style.backgroundColor = currentColor;
   } else {
     event.target.style.backgroundColor = "white";
   }
+};
+
+pixelTable.addEventListener("click", paint);
+var currentColor = ";"
+colorPalette.addEventListener ("click", function (){
+  currentColor = event.target.style.backgroundColor;
 });
