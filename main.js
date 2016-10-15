@@ -31,6 +31,7 @@ function palette (){
       newCell.style.borderWidth = "2px"
       newCell.style.borderStyle = "solid";
       newCell.style.borderColor = "black";
+      newCell.id = ww;
       switch (ww){
         case (0):
         newCell.style.backgroundColor = "red";
@@ -72,7 +73,37 @@ function palette (){
         newCell.style.backgroundColor = "black";
         break;
         case (13):
-        newCell.style.backgroundColor = "";
+        newCell.style.backgroundColor = "white";
+        break;
+        case (14):
+        newCell.style.backgroundColor = "cornflowerblue";
+        break;
+        case (15):
+        newCell.style.backgroundColor = "burlywood";
+        break;
+        case (16):
+        newCell.style.backgroundColor = "darkgoldenrod";
+        break;
+        case (17):
+        newCell.style.backgroundColor = "darkmagenta";
+        break;
+        case (18):
+        newCell.style.backgroundColor = "darkred";
+        break;
+        case (19):
+        newCell.style.backgroundColor = "darkturquoise"
+        break;
+        case (20):
+        newCell.style.backgroundColor = "dimgrey";
+        break;
+        case (21):
+        newCell.style.backgroundColor = "forestgreen";
+        break;
+        case (22):
+        newCell.style.backgroundColor = "lightsalmon";
+        break;
+        case (23):
+        newCell.style.backgroundColor = "olive";
       }
         newRow.appendChild(newCell);
         }
@@ -80,7 +111,8 @@ function palette (){
       document.body.appendChild(pal);
     }
 palette ();
-
+var whiteBlock = document.getElementById("13");
+whiteBlock.innerText = "white";
 var directions = document.createElement("p");
 document.body.appendChild(directions);
 directions.innerText = "Click on the color of your choice; point and click to color single pixels, or click and drag to paint larger areas. Use white if you need an eraser. Above all, HAVE FUN!"
