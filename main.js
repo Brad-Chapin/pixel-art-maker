@@ -11,7 +11,6 @@ function canvas (height, width){
       col.style.borderColor = "black";
       col.style.borderStyle = "solid";
       col.style.backgroundColor = "white";
-      col.class = "color-cell";
       row.appendChild(col);
     }
     tbl.appendChild(row);
@@ -82,9 +81,12 @@ function palette (){
     }
 palette ();
 
+var directions = document.createElement("p");
+document.body.appendChild(directions);
+directions.innerText = "Click on the color of your choice; point and click to color single pixels, or click and drag to paint larger areas. Use white if you need an eraser. Above all, HAVE FUN!"
+
 var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
-// var colorCells = document.getElementsByClass("color-cell");
 
 function paint (event){
   if (event.target.tagName == "TD"){
@@ -98,17 +100,18 @@ colorPalette.addEventListener ("click", function (){
   currentColor = event.target.style.backgroundColor;
 });
 
-pixelTable.addEventListener("mousedown", function(){
-  pixelTable.addEventListener("mouseover", function(){
-    if (event.target.tagName == "TD"){
-    event.target.style.backgroundColor = currentColor;
-    console.log("testing");
-  }
-  });
-});
+pixelTable.addEventListener ("mousedown", addPaint);
 
-pixelTable.addEventListener("mouseup", function(){
-  pixelTable.removeEventListener("mouseover", function(){
-    console.log("testing");
-  });
+function addPaint (event) {
+  pixelTable.addEventListener ("mouseover", multiPaint);
+};
+
+function multiPaint (event) {
+  if (event.target.tagName == "TD"){
+    event.target.style.backgroundColor = currentColor;
+  }
+};
+
+pixelTable.addEventListener ("mouseup", function(){
+  pixelTable.removeEventListener ("mouseover", multiPaint);
 });
