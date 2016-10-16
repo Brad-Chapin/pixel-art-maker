@@ -1,8 +1,11 @@
 function canvas (height, width){
+//creates the cannvas table
   var tbl = document.createElement("table");
   tbl.id ="canvas";
+//creates the canvas rows
   for (h = 0; h < height; h++){
     var row = document.createElement ("tr");
+//creates the canvas columns, and styles them, adds ID's for later access
     for (w = 0; w < width; w++){
       var col = document.createElement("td");
       col.style.height = "10px";
@@ -21,10 +24,13 @@ function canvas (height, width){
 canvas (35, 76);
 
 function palette (){
+//creates the palette table
   var pal = document.createElement("table");
   pal.id = "palette";
+//creates the row
   var newRow = document.createElement("tr");
-    for (ww = 0; ww < 25; ww++){
+//creates the buttons (columns) and styles them
+    for (ww = 0; ww < 24; ww++){
       var newCell = document.createElement("td");
       newCell.style.height = "40px";
       newCell.style.width = "40px";
@@ -32,6 +38,7 @@ function palette (){
       newCell.style.borderStyle = "solid";
       newCell.style.borderColor = "black";
       newCell.id = ww;
+//adds colors to the palette buttons
       switch (ww){
         case (0):
         newCell.style.backgroundColor = "red";
@@ -107,31 +114,56 @@ function palette (){
       }
         newRow.appendChild(newCell);
         }
+        var custom =  document.createElement("input");
+        custom.type = ("color");
+        custom.style.width = "50px";
+        newRow.appendChild(custom);
+        var colorButton = document.createElement("button");
+        colorButton.innerText = "Custom Colors!";
+        colorButton.style.width = "55px";
+        newRow.appendChild(colorButton);
       pal.appendChild(newRow);
       document.body.appendChild(pal);
     }
 palette ();
+//
+// var custom =  document.createElement("input");
+// custom.type = ("color");
+// custom.style.width = "40px";
+// custom.style.borderWidth = "2px"
+// custom.style.borderStyle = "solid";
+// custom.style.borderColor = "black";
+// newRow.appendChild(custom);
+
+//adds a label to the white selector for improved UX
 var whiteBlock = document.getElementById("13");
 whiteBlock.innerText = "white";
-var directions = document.createElement("p");
-document.body.appendChild(directions);
-directions.innerText = "Click on the color of your choice; point and click to color single pixels, or click and drag to paint larger areas. Use white if you need an eraser. Above all, HAVE FUN!"
 
+//adds directions for improved UX
+var directions = document.createElement("p");
+directions.style.fontSize = ("15px");
+document.body.appendChild(directions);
+directions.innerText = "Click on the color of your choice; point and click to color single pixels, or click and drag to paint larger areas. Use white if you need an eraser. The last button is a color picker. Above all, HAVE FUN!"
+
+//defines palette and canvas for ease of maintenance
 var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
 
+//adds currently selected color to the clicked location(s)
 function paint (event){
   if (event.target.tagName == "TD"){
     event.target.style.backgroundColor = currentColor;
 }
 };
 
+//makes the color clicked on the palette the current color
 pixelTable.addEventListener ("click", paint);
 var currentColor = "";
 colorPalette.addEventListener ("click", function (){
   currentColor = event.target.style.backgroundColor;
 });
 
+//starts continuous paint mode on mousedown, ends it on mouseup
 pixelTable.addEventListener ("mousedown", addPaint);
 
 function addPaint (event) {
