@@ -114,26 +114,21 @@ function palette (){
       }
         newRow.appendChild(newCell);
         }
+//creates custom color picker structure; function to be added below
         var custom =  document.createElement("input");
         custom.type = ("color");
         custom.style.width = "50px";
+        custom.id = ("mixer");
         newRow.appendChild(custom);
-        var colorButton = document.createElement("button");
-        colorButton.innerText = "Custom Colors!";
-        colorButton.style.width = "55px";
-        newRow.appendChild(colorButton);
+        var button = document.createElement("button");
+        button.innerText = "Custom Colors!";
+        button.style.width = "55px";
+        button.id = "colorButton";
+        newRow.appendChild(button);
       pal.appendChild(newRow);
       document.body.appendChild(pal);
     }
 palette ();
-//
-// var custom =  document.createElement("input");
-// custom.type = ("color");
-// custom.style.width = "40px";
-// custom.style.borderWidth = "2px"
-// custom.style.borderStyle = "solid";
-// custom.style.borderColor = "black";
-// newRow.appendChild(custom);
 
 //adds a label to the white selector for improved UX
 var whiteBlock = document.getElementById("13");
@@ -145,9 +140,11 @@ directions.style.fontSize = ("15px");
 document.body.appendChild(directions);
 directions.innerText = "Click on the color of your choice; point and click to color single pixels, or click and drag to paint larger areas. Use white if you need an eraser. The last button is a color picker. Above all, HAVE FUN!"
 
-//defines palette and canvas for ease of maintenance
+//defines several code blocks for ease of maintenance
 var colorPalette = document.getElementById("palette");
 var pixelTable = document.getElementById("canvas");
+var colorButton = document.getElementById("colorButton");
+var mixer = document.getElementById("mixer");
 
 //adds currently selected color to the clicked location(s)
 function paint (event){
@@ -179,3 +176,10 @@ function multiPaint (event) {
 pixelTable.addEventListener ("mouseup", function(){
   pixelTable.removeEventListener ("mouseover", multiPaint);
 });
+
+colorButton.addEventListener ("click", picker);
+
+function picker (event){
+  currentColor = mixer.value;
+  console.log (mixer.value);
+};
