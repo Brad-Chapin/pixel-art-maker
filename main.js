@@ -182,4 +182,5 @@ colorButton.addEventListener ("click", picker);
 function picker (event){
   currentColor = mixer.value;
   console.log (mixer.value);
+  console.log (currentColor);
 };
